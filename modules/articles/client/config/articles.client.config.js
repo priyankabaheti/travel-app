@@ -13,13 +13,13 @@ angular.module('articles').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Recent Places',
+      title: 'Travel Places',
       state: 'articles.list'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Itinerary',
+      title: 'Travel Experience',
       state: 'articles.create',
       roles: ['user']
     });

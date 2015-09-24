@@ -122,7 +122,7 @@
                                      <div class="book_date">
                                      <form>
                                       <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                      <input type="date"ng-model="checkin" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
+                                      <input type="date" ng-model="checkIn" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
                                     </form>
                                      </div>   
                                    </li>
@@ -131,7 +131,7 @@
                                      <div class="book_date">
                                        <form>
                                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                        <input type="date" ng-model="checkout" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
+                                        <input type="date" ng-model="checkOut" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
                                       </form>
                                      </div>         
                                    </li>
@@ -209,9 +209,11 @@
   <!-- //banner -->
   <div class="move-text">
    
-  </div>
+  </div><div class="modal"  ng-show="showSpinner">
+            <img src="lib/img/ajax-loader.gif"  class="ajax-loader modal-content"/>
+        </div>
   <!-- banner-bottom -->
-  <div class="banner-bottom">
+  <div ng-hide="hotels"class="banner-bottom">
     <!-- container -->
     <div class="container">
       <div class="banner-bottom-info">
@@ -394,8 +396,39 @@
       </div>
     </div>
     <!-- //container -->
-  </div>
+      </div>
+      </div>
+      <div class="modal"  ng-show="showSpinner">
+            <img src="modules/core/client/img/loaders/loader.gif"  class="ajax-loader modal-content"/>
+        </div>
+<div ng-show="hotels"  class="banner-bottom">
+ <div class="container">
+      <div class="banner-bottom-info">
+        <h3>Check out our various Hotels here!</h3>
+      </div>
+      <div class="banner-bottom-grids">
+        <div ng-repeat ="hotel in hotelsInfo"class="col-md-4 weekend-grids">
+          <div class="weekend-grid">
+            <a href="products.html">
+              <img width="200" height="200" ng-src="{{hotel.hotel_data_node.img_selected.thumb.l}}" alt="" />
+              <div class="weekend-grid-info">
+                <h5>{{hotel.hotel_data_node.name}}</h5>
+                <div ng-repeat="rate in range(hotel.hotel_data_node.rating)" class="rating">
+                  *<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                
+                </div>
+                <h6>Rating {{hotel.hotel_data_node.rating}} out of 5</h6>
+                
+              </div>
+            </a>
+          </div>
+        </div>
+        </div>
 
+        </div>
+        </div>
+
+</div>
   </div>
  
 </section>

@@ -21,5 +21,21 @@ var CountrySchema = new Schema({
 
 }, { strict: false });
 
+var AirportSchema = new Schema({
+
+    city : String,
+    code : String,
+    worldareacode : String,
+    country : String,
+    longitude : Number,
+    latitude : Number,
+    airportname : String,
+    gmt :String
+
+}, { strict: false });
+
+
+
+mongoose.model('Airport', AirportSchema);
 
 mongoose.model('City', CountrySchema);

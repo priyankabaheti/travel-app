@@ -1,28 +1,30 @@
 <section ng-controller="ArticlesController">
   <div class="page-header">
-    <h1>New Article</h1>
+    <h1 ng-bind="article.title"></h1>
   </div>
-  <div class="col-md-12">
-    <form name="articleForm" class="form-horizontal" ng-submit="create(articleForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="title">Title</label>
-          <input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="articleForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Article title is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="content">Content</label>
-          <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+ <div class="discover-inner">
+  <div class="discover-header"> 
+    <h1>Discover</h1> 
+      <ul class="filterer _inverse">
+       <!----> <li data-ember-action="1689" class="is-selected food-tab"> 
+            Food
+            <span class="hide-for-small">&nbsp;&amp; Drink</span> 
+            </li>  
+            <li data-ember-action="1690" class=" hotel-tab"> Hotels </li> 
+              <li data-ember-action="1691" class=" activity-tab"> Activities </li>   
+        </ul> 
+        </div>  
+    <div class="big-input-wrap _inverse"> 
+    <label>Find something tasty in...</label> 
+      <div class="big-input-inner"> 
+        <div class="big-input-field"> 
+        <div class="big-input-icon label-icon is-active"> 
+        <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-place"></use></svg> </div>  <input id="ember1696" class="ember-view ember-text-field _with-icon" placeholder="e.g, San Francisco, London, etc." type="text" autocomplete="[object Object]">  
+        </div> <div class="btn _btn-primary" data-ember-action="1694">Search for&nbsp;Places to Eat</div> </div> </div> <div class="google-places-placeholder">
+          
+        </div> <!---->  <div class="discover-powered-by"> <!---->  
+        <span>Powered by</span> <span class="foursquare-svg">
+         <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-foursquare-wordmark"></use></svg> </span>  <!----> <!----> 
+         </div> 
+         </div>
 </section>

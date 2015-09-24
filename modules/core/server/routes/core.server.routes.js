@@ -5,9 +5,11 @@ module.exports = function (app) {
   var core = require('../controllers/core.server.controller');
 
   var city = require('../controllers/city.server.controller');
- 	
+ 	 var airport = require('../controllers/airport.server.controller');
  app.route('/api/cities')
     .get(city.list);
+app.route('/api/airport')
+    .get(airport.list);
   // Define error pages
   app.route('/server-error').get(core.renderServerError);
 

@@ -2,21 +2,29 @@
   <div class="page-header">
     <h1 ng-bind="article.title"></h1>
   </div>
-  <div class="pull-right" ng-show="authentication.user._id == article.user._id">
-    <a class="btn btn-primary" ui-sref="articles.edit({articleId: article._id})">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="remove();">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="article.created | date:'mediumDate'"></span>
-      by
-      <span ng-bind="article.user.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="article.content"></p>
+ <div class="discover-inner">
+  <div class="discover-header"> 
+    <h1>Discover</h1> 
+      <ul class="filterer _inverse">
+       <!----> <li data-ember-action="1689" class="is-selected food-tab"> 
+            Food
+            <span class="hide-for-small">&nbsp;&amp; Drink</span> 
+            </li>  
+            <li data-ember-action="1690" class=" hotel-tab"> Hotels </li> 
+              <li data-ember-action="1691" class=" activity-tab"> Activities </li>   
+        </ul> 
+        </div>  
+    <div class="big-input-wrap _inverse"> 
+    <label>Find something tasty in...</label> 
+      <div class="big-input-inner"> 
+        <div class="big-input-field"> 
+        <div class="big-input-icon label-icon is-active"> 
+        <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-place"></use></svg> </div>  <input id="ember1696" class="ember-view ember-text-field _with-icon" placeholder="e.g, San Francisco, London, etc." type="text" autocomplete="[object Object]">  
+        </div> <div class="btn _btn-primary" data-ember-action="1694">Search for&nbsp;Places to Eat</div> </div> </div> <div class="google-places-placeholder">
+          
+        </div> <!---->  <div class="discover-powered-by"> <!---->  
+        <span>Powered by</span> <span class="foursquare-svg">
+         <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-foursquare-wordmark"></use></svg> </span>  <!----> <!----> 
+         </div> 
+         </div>
 </section>

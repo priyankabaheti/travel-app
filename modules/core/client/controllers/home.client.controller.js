@@ -35,13 +35,23 @@ angular.module('core').controller('HomeController', ['$scope','$http', 'Authenti
 
 
                     };
-   
+   $scope.range = function(count){
+
+ return Array.apply(0, Array(+count));
+}
   
   $scope.cityName='';
+  $scope.checkIn='';
+  $scope.checkOut='';
   $scope.search= function(){
   	console.log($scope.cityName);
+  	$scope.hotels=true;
+  	$scope.showSpinner=true;
+  	console.log($scope.checkOut+ "----ffffffff----" + $scope.checkIn);
   	$http.get("http://developer.goibibo.com/api/voyager/get_hotels_by_cityid?app_id=d1a6be68&app_key=b6e71c60566aae6ce8d84edcc3b51bd7&city_id="+$scope.cityName.id).success(function(response){
-  		console.log(data);
+  		console.log(response.data);
+  		$scope.hotelsInfo= response.data;
+  		$scope.showSpinner=false;
 
   	})
   };
