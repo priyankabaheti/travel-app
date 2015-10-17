@@ -1,8 +1,8 @@
 
 <link href="modules/core/client/css/jquery-ui.css" type="text/css" rel="stylesheet" media="all">
-<link href="modules/core/client/css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="modules/core/client/css/flexslider.css" type="text/css" media="screen" />
-<link type="text/css" rel="stylesheet" href="modules/core/client/css/JFFormStyle-1.css" />
+<link href="modules/core/client/css/style.css" type="text/css" rel="stylesheet" media="all"><!--
+<link rel="stylesheet" href="modules/core/client/css/flexslider.css" type="text/css" media="screen" />-->
+<!--<link type="text/css" rel="stylesheet" href="modules/core/client/css/JFFormStyle-1.css" />-->
 <link href="modules/core/client/css/style.css" type="text/css" rel="stylesheet" media="all">
  <!--  <div class="jumbotron text-center">
     <div class="row">
@@ -13,7 +13,7 @@
     <br>
     <div class="row">
       <p class="lead">
-      
+
       </p>
     </div>
     <div class="row">
@@ -22,71 +22,71 @@
       </p>
     </div>
   </div> -->
- 
+
 <script src="modules/core/client/js/menu_jquery.js"></script>
 <script src="modules/core/client/js/jquery.min.js"></script>
-<script src="modules/core/client/js/modernizr.custom.js"></script>   
+<script src="modules/core/client/js/modernizr.custom.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
       $('#horizontalTab').easyResponsiveTabs({
-        type: 'default', //Types: default, vertical, accordion           
+        type: 'default', //Types: default, vertical, accordion
         width: 'auto', //auto or any width like 600px
         fit: true   // 100% fit in a container
       });
     });
 
   </script>
-  
+
   <section class="container" ng-controller="HomeController">
   <div class="row">
- 
+
   <!--//header-->
   <!-- banner -->
   <div class="banner holidays-banner">
     <!-- container -->
     <div class="container">
       <div class="col-md-4 banner-left">
-     
+
         <section class="slider2">
           <div class="flexslider">
             <ul class="">
-              
+
                 <div class="slider-info">
                   <img width="350" height="350" src="modules/core/client/img/brand/images/1.jpg" alt="">
                 </div>
-              
+
           <!--  <li>
                 <div class="slider-info">
                   <img src="modules/core/client/img/brand/images/6.jpg" alt="">
                 </div>
               </li> -->
-             <!--  <li>  
+             <!--  <li>
                 <div class="slider-info">
                   <img src="modules/core/client/img/brand/images/7.jpg" alt="">
                 </div>
               </li>
-              <li>  
+              <li>
                 <div class="slider-info">
                   <img src="modules/core/client/img/brand/images/8.jpg" alt="">
                 </div>
               </li>
-              <li>  
+              <li>
                 <div class="slider-info">
                   <img src="modules/core/client/img/brand/images/6.jpg" alt="">
                 </div>
               </li>  -->
-            </ul> 
+            </ul>
           </div>
-        </section> 
+        </section>
         <!--FlexSlider-->
       </div>
       <div class="col-md-8 banner-right">
-        <div class="sap_tabs">  
+        <div class="sap_tabs">
           <div class="booking-info about-booking-info">
             <h2>Planning a holiday</h2>
           </div>
-          <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">  
-              <!---->        
+          <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+              <!---->
                   <div class="facts weekend-facts">
                     <div class="booking-form train-form">
                     <link rel="stylesheet" href="css/jquery-ui.css" />
@@ -98,12 +98,12 @@
                       </script>
                       <!---/End-date-piker---->
                       <!-- Set here the key for your domain in order to hide the watermark on the web server -->
-                      
+
                       <div class="online_reservation">
                           <div class="b_room">
                             <div class="booking_room">
                               <div class="reservation">
-                                <ul>    
+                                <ul>
                                   <li  class="span1_of_1 desti about-desti">
                                      <h5>Destination</h5>
                                      <div class="book_date">
@@ -111,29 +111,54 @@
                                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                         <input type="text" ng-model="cityName" placeholder="City, Area or Hotel Name"  typeahead="item as item.title for item in recommend($viewValue) | filter:{title:$viewValue}" class="typeahead1 input-md form-control tt-input" required="">
                                        </form>
-                                     </div>         
+                                     </div>
                                    </li>
                                 </ul>
                               </div>
                               <div class="reservation">
-                                <ul>  
+                                <ul>
                                    <li  class="span1_of_1">
                                      <h5>Check in</h5>
                                      <div class="book_date">
-                                     <form>
+                                         <p class="input-group">
+                                           <input type="date" class=""
+                                                  uib-datepicker-popup="{{format}}"
+                                                  ng-model="checkIn"
+                                                  is-open="status.opened"
+                                                  min-date="minDate" max-date="maxDate"
+                                                  datepicker-options="dateOptions"
+                                                  close-text="Close" />
+                                        <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                         </p>
+                                    <!-- <form>
+
                                       <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                       <input type="date" ng-model="checkIn" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
-                                    </form>
-                                     </div>   
+                                    </form>-->
+                                     </div>
                                    </li>
-                                   <li  class="span1_of_1 left">
+                                   <li  class="span1_of_1 ">
                                      <h5>Check out</h5>
                                      <div class="book_date">
-                                       <form>
-                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+
+                                           <p class="input-group">
+                                             <input type="date" class=""
+                                                    uib-datepicker-popup="{{format}}"
+                                                    ng-model="checkOut" is-open="status2.opened"
+                                                    min-date="checkIn" max-date="maxDate"
+                                                    datepicker-options="dateOptions"
+                                                    close-text="Close" />
+                                          <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                          </span>
+                                           </p>
+
+                                        <!--<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                         <input type="date" ng-model="checkOut" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
-                                      </form>
-                                     </div>         
+                                      </form>-->
+                                     </div>
                                    </li>
                                    <li class="span1_of_1 left w-adult">
                                      <h5>Adults (18+)</h5>
@@ -141,13 +166,13 @@
                                      <div class="section_room">
                                         <select id="country" onchange="change_country(this.value)" class="frm-field required">
                                           <option value="null">1</option>
-                                          <option value="null">2</option>         
+                                          <option value="null">2</option>
                                           <option value="AX">3</option>
                                           <option value="AX">4</option>
                                           <option value="AX">5</option>
                                           <option value="AX">6</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                   <li class="span1_of_1 left w-child">
                                      <h5>Children (0-17)</h5>
@@ -155,13 +180,13 @@
                                      <div class="section_room">
                                         <select id="country" onchange="change_country(this.value)" class="frm-field required">
                                           <option value="null">1</option>
-                                          <option value="null">2</option>         
+                                          <option value="null">2</option>
                                           <option value="AX">3</option>
                                           <option value="AX">4</option>
                                           <option value="AX">5</option>
                                           <option value="AX">6</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                   <li class="span1_of_1 w-rooms">
                                      <h5>Rooms</h5>
@@ -169,25 +194,25 @@
                                      <div class="section_room">
                                         <select id="country" onchange="change_country(this.value)" class="frm-field required">
                                           <option value="null">1</option>
-                                          <option value="null">2</option>         
+                                          <option value="null">2</option>
                                           <option value="AX">3</option>
                                           <option value="AX">4</option>
                                           <option value="AX">5</option>
                                           <option value="AX">6</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                    <div class="clearfix"></div>
                                 </ul>
                               </div>
                               <div class="reservation">
-                                <ul>  
+                                <ul>
                                    <li class="span1_of_3">
-                                      <div class="date_btn">
-                                        <form>
-                                          <input type="submit" ng-click ="search()" value="Search" />
-                                        </form>
-                                      </div>
+
+                                          <button class="btn btn-success" type="submit" ng-click ="search()" value="Search" >Search Hotels</button>
+                                      <a class="btn btn-default" type="submit" ui-sref="articles.list" value="Search" >Find Flights</a>
+
+
                                    </li>
                                    <div class="clearfix"></div>
                                 </ul>
@@ -197,9 +222,9 @@
                           </div>
                       </div>
                       <!---->
-                    </div>  
+                    </div>
                   </div>
-          </div>  
+          </div>
         </div>
       </div>
       <div class="clearfix"> </div>
@@ -208,7 +233,7 @@
   </div>
   <!-- //banner -->
   <div class="move-text">
-   
+
   </div><div class="modal"  ng-show="showSpinner">
             <img src="lib/img/ajax-loader.gif"  class="ajax-loader modal-content"/>
         </div>
@@ -234,7 +259,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 4.1 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -251,7 +276,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 2.9 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -269,7 +294,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 3.5 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -291,7 +316,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 3 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -310,7 +335,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 4.1 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -327,7 +352,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 2.9 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -348,8 +373,8 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 3.5 out of 5</h6>
-                
-               
+
+
               </div>
             </a>
           </div>
@@ -368,7 +393,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 3 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -387,7 +412,7 @@
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 </div>
                 <h6>Guest Rating 4.1 out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -398,27 +423,40 @@
     <!-- //container -->
       </div>
       </div>
-      <div class="modal"  ng-show="showSpinner">
-            <img src="modules/core/client/img/loaders/loader.gif"  class="ajax-loader modal-content"/>
-        </div>
-<div ng-show="hotels"  class="banner-bottom">
+
+    <div class="disc-details">
+      <div ng-show="hotels"  class="banner-bottom">
  <div class="container">
       <div class="banner-bottom-info">
         <h3>Check out our various Hotels here!</h3>
       </div>
-      <div class="banner-bottom-grids">
-        <div ng-repeat ="hotel in hotelsInfo"class="col-md-4 weekend-grids">
+   <div id="mydiv"  ng-show="showSpinner">
+     <img src="modules/core/client/img/loaders/loader.gif"  class="ajax-loader modal-content"/>
+   </div>
+   <div class="banner-bottom-grids">
+        <div ng-repeat ="hotel in hotelsInfo| limitTo:10" ng-init="checkIfDataExists(hotel.hotel_data_node._id)"class="col-md-4 weekend-grids">
           <div class="weekend-grid">
-            <a href="products.html">
+
+              <div class="btn btn-group">
+
+                <span><button class="btn btn-info" ng-click="saveIdea(hotel)"> Save Idea</button></span>
+              </div>
+              <div class="btn btn-group">
+
+                <span><button class="btn btn-info" ng-hide="showAdded(hotel.hotel_data_node._id)" ng-click="openItinerary(hotel)">Add To Itinerary</button>
+                <button ng-show="showAdded(hotel.hotel_data_node._id)" class="btn btn-success">Added To Itinerary</button>
+                </span> <!---use index to show-->
+              </div>
+            <a href="#">
               <img width="200" height="200" ng-src="{{hotel.hotel_data_node.img_selected.thumb.l}}" alt="" />
               <div class="weekend-grid-info">
                 <h5>{{hotel.hotel_data_node.name}}</h5>
-                <div ng-repeat="rate in range(hotel.hotel_data_node.rating)" class="rating">
+                <!--<div ng-repeat="rate in range(hotel.hotel_data_node.rating)" class="rating">
                   *<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                
-                </div>
+
+                </div>-->
                 <h6>Rating {{hotel.hotel_data_node.rating}} out of 5</h6>
-                
+
               </div>
             </a>
           </div>
@@ -430,13 +468,14 @@
 
 </div>
   </div>
- 
-</section>
-<script src="modules/core/client/js/jquery.flexslider.js"></script>
 
-<script  src="modules/core/client/js/JFCore.js"></script>
+</section><!--
+<script src="modules/core/client/js/jquery.flexslider.js"></script>-->
+
+<!--<script  src="modules/core/client/js/JFCore.js"></script>-->
+
   <script src="modules/core/client/js/easyResponsiveTabs.js" type="text/javascript"></script>
-  
+
   <script type="text/javascript">
     $(function(){
       SyntaxHighlighter.all();
@@ -449,4 +488,4 @@
       }
       });
     });
-  </script>   
+  </script>

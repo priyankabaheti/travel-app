@@ -1,0 +1,85 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Update Itinerary
+
+      <button class="btn btn-default btn-cancel pull-right" ng-click="cancel()" data-dismiss="modal">X</button>
+    </h4>
+  </div>
+  <div class="modal-body">
+    <!-- <div class="modal"  ng-show="showSpinner">
+       <img src="lib/img/ajax-loader.gif"  class="ajax-loader modal-content"/>
+     </div>-->
+    <div class="notify-success" ng-show="showSuccess">
+      <button type="button" class="close" data-ng-click="switchBool('showSuccess')" >×</button>
+      <strong></strong> Successfully Updated
+    </div>
+    <div class="notify-error" ng-show="showError">
+      <button type="button" class="close" data-ng-click="switchBool('showError')" >×</button>
+      <strong></strong> {{errorText}}
+    </div>
+    <div class="notify-warning" ng-show="showInfo">
+      <button type="button" class="close" data-ng-click="switchBool('showInfo')" >×</button>
+      <strong></strong> {{infoText}}
+    </div>
+    <div class="col-md-12">
+      <form novalidate="novalidate">
+        <div class="form-group col-md-6">
+
+          <label>Title</label>
+          <div class="controls">
+            <input class="form-control" ng-model="iti.title" placeholder="Let's Do This" name="title" type="text">
+          </div>
+          <label>Notes</label>
+          <div class="controls">
+            <textarea class="form-control" ng-model="iti.notes" placeholder="Anything you might want to add" cols="20" row="10"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+
+          <label>Day</label>
+          <!--<div class="controls">
+            <input class="form-control" ng-model="iti.day" placeholder="Day" name="day" type="text">
+          </div>-->
+          <div class="controls">
+            <div ng-if="iti.data.listOfDays"><select class="form-control" ng-model="iti.day"   required >
+              <option ng-repeat="i in iti.data.listOfDays |date:'medium' track by $index ">
+                Day {{$index+1}}-{{i| date:'mediumDate'}} </option>
+            </select>
+            </div>
+
+            <div class="book_date" ng-if="!iti.data.listOfDays">
+             <span ng-click="open($event)"  aria-hidden="true" class="glyphicon glyphicon-calendar">
+             </span>
+              <input type="date" class="form-control"
+                     uib-datepicker-popup="{{format}}"
+                     ng-model="iti.day"
+                     is-open="status.opened"
+                     min-date="minDate" max-date="maxDate"
+                     datepicker-options="dateOptions"
+                     close-text="Close" />
+            </div>
+          </div>
+
+
+          <label> Place </label>
+          <div class="controls" ng-if="iti.data.name">
+            <img src="{{iti.data.img}}" width="50" height="50">
+           <!-- <span class="place-name" ng-bind="data.name"></span><br/>
+            <span ng-bind="data.location"></span><br/>
+            <span ng-bind="data.city"></span> ,<span ng-bind="data.country"></span>
+         --> </div>
+          <div class="controls" ng-if="!iti.data.name">
+            <input type="text" class="form-control" ng-model="iti.place">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-footer action-bar">
+    <a style="color: #1599CE;" class="" ng-click="cancel()" data-dismiss="modal" type="button">Close</a>
+
+     <button class="btn btn-enable" ng-if="!data.name" ng-click="updateItinerary(iti)" data-dismiss="modal" >Save</button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<section ng-controller="ArticlesController" ng-init="find()">
+<section ng-controller="HomeController">
 
  <link rel="stylesheet" href="modules/core/client/css/jquery-ui.css" />
                        <script>
@@ -6,50 +6,38 @@
                           $( "#datepicker,#datepicker1" ).formatDate('yyyymmdd', new Date());
                         });
                       </script>
-<!-- 
+<!--
 <link href="modules/core/client/css/itinerary.css" type="text/css" rel="stylesheet" media="all"> -->
   <!-- <div class="page-header">
     <h1>Articles</h1>
-  </div> --><!-- 
+  </div> --><!--
   <div style="background-image:url('/modules/core/client/img/brand/travel.jpg')" class="discover-inner"> -->
    <div class="row">
- 
+
   <!--//header-->
   <!-- banner -->
   <div class="banner holidays-banner">
-  <div class="discover-header"> 
-    <h1>Discover</h1> 
+  <div class="discover-header">
+    <h1>Discover</h1>
+    <br/>
      <div class="container">
-     
-      <!-- <ul class="filterer _inverse">
-        <li data-ember-action="1689" class="is-selected food-tab"> 
-            
-            <span class="hide-for-small">Trip Plan</span> 
-            </li>  
-            <li data-ember-action="1690" class=" hotel-tab"> Hotels </li> 
-              <li data-ember-action="1691" class=" activity-tab"> Activities </li>   
-        </ul> 
-        </div>  
-    <div class="big-input-wrap _inverse"> 
-    <label>Suggest.</label> 
-      <div class="big-input-inner"> 
-        <div class="big-input-field"> 
-        <div class="big-input-icon label-icon is-active">  -->
-          <div class="row online_reservation">
-                          <div class="b_room">
+
+
+          <div class="row online_reservation" style="background-color: #004444;" >
+                          <div class="b_room col-md-8" >
                             <div class="booking_room">
                               <div class="reservation">
-                                <ul>    
+                                <ul>
                                   <li  class="span1_of_1 desti">
                                      <h5>Source</h5>
                                      <div class="book_date">
                                        <form>
                                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                        <input type="text" ng-model="source" placeholder="Type Depature City" class="typeahead1 input-md form-control tt-input" 
-                                        typeahead="item as item.title for item in recommendFlight($viewValue) | filter:{title:$viewValue}" 
+                                        <input type="text" ng-model="source" placeholder="Type Depature City" class="typeahead1 input-md form-control tt-input"
+                                        typeahead="item as item.title for item in recommendFlight($viewValue) | filter:{title:$viewValue}"
                                         required="">
                                        </form>
-                                     </div>         
+                                     </div>
                                    </li>
                                    <li  class="span1_of_1 left desti">
                                      <h5>Destination</h5>
@@ -58,71 +46,91 @@
                                       <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                       <input type="text" ng-model= "destination" placeholder="Type Destination City" class="typeahead1 input-md form-control tt-input"typeahead="item as item.title for item in recommendFlight($viewValue) | filter:{title:$viewValue}" required="">
                                      </form>
-                                     </div>    
+                                     </div>
                                    </li>
                                    <div class="clearfix"></div>
                                 </ul>
                               </div>
                               <div class="reservation">
-                                <ul>  
+                                <ul>
                                    <li  class="span1_of_1">
                                      <h5>Departure</h5>
                                      <div class="book_date">
-                                     <form>
+                                       <span ng-click="open($event)"  aria-hidden="true"class="glyphicon glyphicon-calendar">
+                                        </span>
+                                           <input type="date" class="form-control"
+                                                  uib-datepicker-popup="{{format}}"
+                                                  ng-model="startDate"
+                                                  is-open="status.opened"
+                                                  min-date="minDate" max-date="maxDate"
+                                                  datepicker-options="dateOptions"
+                                                  close-text="Close" />
+
+                                      <!-- <form>
                                       <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                       <input type="date" ng-model="startDate" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
-                                     </form>
-                                     </div>   
+                                     </form>-->
+                                     </div>
                                    </li>
                                    <li  class="span1_of_1 left">
                                      <h5>Return</h5>
                                      <div class="book_date">
-                                       <form>
+                                        <span  aria-hidden="true"  ng-click="open2($event)"class="glyphicon glyphicon-calendar">
+                                        </span>
+                                       <input type="date" class="form-control"
+                                                uib-datepicker-popup="{{format}}"
+                                                ng-model="endDate"
+                                                is-open="status2.opened"
+                                                min-date="minDate" max-date="maxDate"
+                                                datepicker-options="dateOptions"
+                                                close-text="Close" />
+
+                                                                             <!--<form>
                                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                         <input type="date" ng-model="returnDate" value="Select date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select date';}">
-                                      </form>
-                                     </div>         
+                                      </form>-->
+                                     </div>
                                    </li>
                                    <li class="span1_of_1 left adult">
                                      <h5>Adults (18+)</h5>
                                      <div class="section_room">
                                         <select id="country" onchange="change_country(this.value)" class="frm-field required">
                                           <option value="null">1</option>
-                                          <option value="null">2</option>         
+                                          <option value="null">2</option>
                                           <option value="AX">3</option>
                                           <option value="AX">4</option>
                                           <option value="AX">5</option>
                                           <option value="AX">6</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                   <li class="span1_of_1 left children">
                                      <h5>Children (0-17)</h5>
                                      <div class="section_room">
                                         <select id="country" onchange="change_country(this.value)" class="frm-field required">
                                           <option value="null">1</option>
-                                          <option value="null">2</option>         
+                                          <option value="null">2</option>
                                           <option value="AX">3</option>
                                           <option value="AX">4</option>
                                           <option value="AX">5</option>
                                           <option value="AX">6</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                   <li class="span1_of_1 economy">
                                      <h5>Class</h5>
                                      <div class="section_room">
                                         <select ng-model="seatingclass" id="country" class="frm-field required">
                                           <option value="E">Economy</option>
-                                          <option value="B">Business</option>     
+                                          <option value="B">Business</option>
                                         </select>
-                                     </div> 
+                                     </div>
                                   </li>
                                    <div class="clearfix"></div>
                                 </ul>
                               </div>
                               <div class="reservation">
-                                <ul>  
+                                <ul>
                                    <li class="span1_of_3">
                                       <div class="date_btn">
                                         <form>
@@ -137,45 +145,57 @@
                             <div class="clearfix"></div>
                           </div>
 
-        </div> 
-          
-        </div> <!---->  <div class="discover-powered-by"> <!---->  
-        <span>Powered by</span>GoIbibo </span>  <!----> <!----> 
-         </div> 
+        </div>
+
+        </div> <!---->  <div class="discover-powered-by"> <!---->
+        <span>Powered by </span><img width="45" height="30"src="modules/core/client/img/brand/goLogo.png" alt="goIbibo" ></span>  <!----> <!---->
+         </div>
          </div>
 
          <div class="modal"  ng-show="showSpinner">
             <img src="lib/img/ajax-loader.gif"  class="ajax-loader modal-content"/>
         </div>
 </div>
+
  <div ng-show="flights"  class="banner-bottom">
  <div class="container">
       <div class="banner-bottom-info">
         <h3>Check here!</h3>
       </div>
+   <div id="mydiv"  ng-show="showSpinner">
+     <img src="modules/core/client/img/loaders/loader.gif"  class="ajax-loader modal-content"/>
+   </div>
       <div class="banner-bottom-grids">
         <div ng-repeat ="flight in onwardFlights| orderBy : 'fare.travelportgrossamount' " class="col-md-4 weekend-grids">
           <div class="weekend-grid">
           <!--   <a href="products.html">
               <img width="200" height="200" ng-src="{{hotel.hotel_data_node.img_selected.thumb.l}}" alt="" />
               -->
-              <div style= "border-bottom:grey 1px solid" class="weekend-grid-info"> 
 
+
+
+              <div style= "border-bottom:grey 1px solid" class="weekend-grid-info">
+                <div class="btn btn-group">
+
+                <span><button class="btn btn-info" ng-click="openItinerary(null,flight)">Add To Itinerary</button>
+               <!-- <button ng-show="showAdded(hotel.hotel_data_node._id)" class="btn btn-success">Added To Itinerary</button>
+               --> </span> <!---use index to show-->
+                </div>
                 <h5>{{flight.airline}}</h5>
-                
+
                 <h6>Departs {{flight.DepartureTime|date:'medium'}} </h6>
                 <h6>Arrives {{flight.ArrivalTime|date:'medium'}} </h6>
-                <h5>Cost : 
+                <h5>Cost :
                 Rs {{flight.fare.travelportgrossamount}}</h5>
-                
+
               </div>
-            
+
           </div>
         </div>
         </div>
 
         </div>
         </div>
-        
+
 
 </section>

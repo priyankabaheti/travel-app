@@ -7,8 +7,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 body{
 	margin:0;
 	font-family: 'Open Sans', sans-serif;
-	background-color:#fff;
-    background-image: url('/modules/core/client/img/brand/travel.jpg');
+	background-color:#fff;/*
+    background-image: url('/modules/core/client/img/brand/travel.jpg');*/
 }
 body a{
 	transition: 0.5s all ease;
@@ -2893,4 +2893,162 @@ span.menu {
 .discover-header {
   margin-bottom: 21px;
   margin-bottom: 1.4rem;
+}
+
+
+
+#mydiv {
+    position:relative;
+    top:40%;
+    left:40%;
+    width:10%;
+    height:10%;
+    z-index:1000;
+    background-color:transparent;
+    opacity: .8;
+}
+
+.notify-error {
+    height: 35px;
+    padding-top: 7px;
+    background-color: #EA5A52;
+    text-align: center;
+    color:white;
+}
+.notify-warning {
+    height: 35px;
+    padding-top: 7px;
+    background-color: #d1920b;
+    text-align: center;
+    color:white;
+}
+.notify-success {
+    height: 35px;
+    padding-top: 7px;
+    background-color: #0d7713;
+    text-align: center;
+    color:white;
+}
+.btn-enable{
+    background-color: #1599CE;
+    color: white;
+}
+.big-input-field {
+    position: relative;
+    background-color: #fff;
+    border-radius: 2.625px;
+    border-radius: .175rem;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -moz-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.place-name{
+    font-weight: 200;
+    color: #006666;
+}
+.gridbox {
+    border: 2px solid rgb(131, 131, 137);
+    margin-bottom: 30px;
+
+}
+.gridtop {
+    margin-left: -15px;
+    /* margin-top: -10px; */
+    /* box-sizing: inherit; */
+    width: 100%;
+    height: 40px;
+    /* top: 0px; */
+    color: white;
+    padding: 10px 10px 0px 10px;
+    /*background-color: #44e5af;*/
+    position: absolute;
+    border-bottom: 1px solid #a2a2a2;
+}
+.create{
+    margin-right: 75px;
+    margin-bottom: 10px;
+}
+.gridcontent{
+    margin-top: 50px;
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+.gridStat{
+
+    margin-top: 0px;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+#map {
+    height:420px;
+    width:600px;
+}
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+.block-border {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.fade.ng-hide {
+    opacity: 0;
+}
+
+.fade.ng-hide-remove,
+.fade.ng-hide-add {
+    display: block !important;
+}
+
+.fade.ng-hide-remove {
+    transition: all linear 1000ms;
+}
+
+.fade.ng-hide-add {
+    transition: all linear 500ms;
+}
+.numberCircle {
+    border-radius: 50%;
+
+
+    padding: 8px;
+
+    background: #f2ff8c;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 12px Arial, sans-serif;
+}
+.emerald{
+    background-color: #2ecc71;
+
+}
+
+.carrot{
+    background-color: #e67e22;
+
+}
+.wisteria{
+    background-color: #8e44ad;
+}
+.sunflower{
+    background-color: #f1c40f;
+}
+.midnight{
+    background-color: #2c3e50;
+}
+.pomengrate{
+    background-color: #c0392b;
+}
+.asbestos {
+    background-color: #7f8c8d;
 }

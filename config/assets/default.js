@@ -18,7 +18,9 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/moment/moment.min.js',
-        'public/lib/jquery/dist/jquery.js'
+        'public/lib/jquery/dist/jquery.js',
+          'public/lib/maps.google.js',
+          'public/lib/ngmap/build/scripts/ng-map.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

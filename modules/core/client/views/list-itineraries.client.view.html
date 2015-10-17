@@ -1,0 +1,126 @@
+<section style="background: none;" ng-controller="HomeController" ng-init="findItineraries()">
+  <div class="row">
+    <h4> {{authentication.user.displayName}}! Your itinerary Is Here!</h4>
+    </div>
+<br/>
+    <br/>
+    <div class="page-header">
+      <a class="btn btn-link" ng-click="sendMail()" > Share <img width="20" height="20" src="/modules/core/client/img/email.jpg"></a>
+
+      <a class="btn btn-link" ng-click="fbShare('Fb Share', 'Facebook share popup',
+       'http://goo.gl/dS52U', 520, 350)">Facebook</a>
+      <div class="pull-right" >
+        <button class="btn btn-info" ng-click="openItinerary(null,null)">Create Itinerary</button>
+      </div>
+    </div>
+    <div class="col-md-12">
+
+
+     <!-- <div class="row" ng-click="expand" ng-repeat="i in itinerary">
+
+        <div  ng-if="i.type=='hotel'" class="col-md-10 gridbox" >
+
+          <div class="gridtop emerald full-width">
+
+            <h4>{{i.day_number}} {{i.day| date:'mediumDate'}} {{i.title}} {{i.data.city}}
+
+            </h4>
+          </div>
+          </div>
+        </div>-->
+
+      <div class="row"  ng-repeat="i in itineraries| orderBy:'-created.at'">
+
+          <div  ng-if="i.type=='hotel'" class="col-md-10 gridbox" >
+
+             <div class="gridtop emerald full-width">
+
+              <h4>{{i.day_number}} {{i.day| date:'mediumDate'}} {{i.title}} {{i.data.city}}
+
+              </h4>
+            </div>
+            <div class="content">
+              <a style="cursor: pointer;" class="cursor-pointer" ng-click="getHotelDetails(i.data.id,$index)">
+                <img src="{{i.data.img}}" class="center" height="100" width="100">
+              <h4 ng-bind="i.data.name"></h4></a>
+              <p ng-bind="i.data.location"></p>
+              <p ng-bind="i.data.city"></p>
+              <p ng-bind="i.data.state"></p>
+              <span ng-bind="i.notes"><label>Notes:</label></span>
+
+             <div class="pull-right" >
+               <button class=" btn btn-warning" ng-click="getHotelDetails(i.data.id,$index)">Explore NearBy Places</button>
+               <button class="btn wisteria" ng-click="editItinerary(i,$index)">Edit</button>
+               </div>
+            </div>
+
+            <div class="block-border col-md-10"  ng-if="i.hotelInfo">
+              <div ng-if="i.desc">
+
+                  {{i.desc}}
+
+              </div>
+              <div class="col-md-12" ng-if="i.attractions">
+               <label>Places of Attractions </label>
+                <div class="numberCircle col-md-3" ng-repeat="att in i.attractions">
+                 <a style="cursor: pointer;" ng-mouseover="" tooltip="click to save" ng-click="openAttraction(i,att)">{{att.Description}}</a>
+               </div>
+             </div>
+              <div class="col-md-12">
+
+              <!-- <map center="centerAt" zoom="8"></map>
+-->
+                <!--<map id="map" style="height:450px" zoom="8" zoom-to-include-="" markers="auto" center="centerAt" center-changed="centerChanged()">
+                 &lt;!&ndash; <marker id="{[{$index}]}" animation="DROP" ng-repeat="location in locations" position="{[{location.latitude}]},{[{location.longitude}]}" on-click="click()" title="Click to zoom"></marker>
+&ndash;&gt;
+                </map>-->
+                <map center="{{i.mapcenter.lat}}, {{i.mapcenter.lng}}" zoom="12" style="height: 400px;">
+                  <!--<info-window id="marker-info">
+                    <div ng-non-bindable="">
+                      <strong class="markerTitle">{{ infoWindow.title }}</strong>
+                      <div class="markerContent">
+                        <p>{{ infoWindow.content }}</p>
+                      </div>
+                    </div>
+                  </info-window>-->
+                  <marker  icon="modules/core/client/img/40.png" title="{{i.mapcenter.title}}"style="color: #009900;" position="{{i.mapcenter.lat}}, {{i.mapcenter.lng}}"></marker>
+                  <marker ng-repeat="(id, pos)  in i.markers" id="{{id}}" title="{{pos.title}}" on-click="showInfoWindow(event, pos)" position="{{pos.lat}}, {{pos.lng}}"></marker>
+                </map>
+              </div>
+
+            </div>
+          </div>
+            <div  ng-if="i.type=='user'" class="col-md-10 gridbox">
+              <div class="gridtop midnight full-width">
+
+                <h4>{{i.day_number}} {{i.day| date:'mediumDate'}} {{i.title}} {{i.data.city}}
+
+                </h4>
+              </div>
+
+              <div class="content">
+
+            <h4 ng-bind="i.place"></h4>
+              <label>Notes:</label><p ng-bind="i.notes"></p>
+              <div class="pull-right" >
+                <button class=" btn btn-warning" ng-click="getHotelDetails(i.data.id,$index)">Explore NearBy Places</button>
+                <button class="btn btn-success wisteria" ng-click="editItinerary(i,$index)">Edit</button>
+              </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!--<div class="col-md-4" ng-if="hotelInfo">
+          &lt;!&ndash;<div id="map"></div>
+          <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+            <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+          </div>&ndash;&gt;
+
+        </div>-->
+    </div>
+
+
+
+</section>

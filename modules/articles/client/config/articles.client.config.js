@@ -17,6 +17,11 @@ angular.module('articles').run(['Menus',
       state: 'articles.list'
     });
 
+      Menus.addSubMenuItem('topbar', 'articles', {
+          title: 'My Itinerary',
+          state: 'itinerary.view({itineraryId: art._id})',
+          roles: ['user']
+      });
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {
       title: 'Travel Experience',

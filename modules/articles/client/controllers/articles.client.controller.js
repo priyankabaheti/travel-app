@@ -32,77 +32,7 @@ angular.module('articles').controller('ArticlesController', ['$scope','$http', '
         $scope.error = errorResponse.data.message;
       });
     };
- $scope.recommendFlight = function (parameter) {
 
-                        if(parameter) {
-                            if (parameter.length > 2) {
-                                $scope.showSpinner=true;
-                                return $http.get('api/airport?search=' + parameter,  { cache: true}).then(function (cities) {
-
-                                    if (cities.data.TotalCities == 0) {
-                                        cities.data.AirportData.push({'title': "No Result found",'id':0,'img':false});
-                                        return cities.data.AirportData.map(function (item) {
-                                            return ({title:item.title ,'img':false});
-                                        });
-                                    }
-                                    else {
-                                        return cities.data.AirportData.map(function (item) {
-                                            
-                                            return({'id': item.code, 'title': item.city});
-
-                                        });
-                                    }
-                                    $scope.showSpinner =false;
-                                });
-                            }
-                        }
-
-
-                    };
-
-
-  $scope.source=''; 
-  $scope.destination='';
-  $scope.startDate=''; 
-  $scope.endDate='';
-  $scope.searchFlights= function(){
-    console.log($scope.source);
-    var sourceCode= $scope.source.id;
-    var destinationCode=$scope.destination.id;
-    $scope.flights=true;
-    var seatingClass= this.seatingclass;
-    if(seatingClass==undefined){
-      seatingClass='E';
-    }
-    $scope.showSpinner=true;
-    console.log($scope.startDate+ "----ffffffff----" + $scope.endDate);
-      var formattedDate = moment($scope.startDate).format('YYYYMMDD');
-      console.log(formattedDate);
-
-    if(!$scope.endDate){
-      $http.get("http://developer.goibibo.com/api/search/?app_id=d1a6be68&app_key=b6e71c60566aae6ce8d84edcc3b51bd7&format=json&source="
-      +sourceCode+"&destination="+destinationCode+"+&dateofdeparture="+formattedDate+"&seatingclass="+seatingClass+"&adults=1&children=0&infants=0")
-    .success(function(response){
-      console.log(response.data);
-      $scope.onwardFlights= response.data.onwardflights;
-
-      $scope.showSpinner=false;
-
-    });
-  }
-  if($scope.endDate){
-     var endDate = moment($scope.endDate).format('YYYYMMDD');
-      console.log(endDate);
-      $http.get("http://developer.goibibo.com/api/search/?app_id=d1a6be68&app_key=b6e71c60566aae6ce8d84edcc3b51bd7&format=json&source="
-      +sourceCode+"&destination="+destinationCode+"+&dateofdeparture="+formattedDate+"&dateofarrival="+endDate+"&seatingclass="+seatingClass+"&adults=1&children=0&infants=0")
-    .success(function(response){
-      console.log(response.data);
-      $scope.flightsInfo= response.data;
-      $scope.showSpinner=false;
-
-    });
-  }
-  };
     // Remove existing Article
     $scope.remove = function (article) {
       if (article) {
