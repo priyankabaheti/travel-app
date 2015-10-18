@@ -1,3 +1,24 @@
+<!--
+<div id="fb-root"></div><script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1638811949706838',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+</script>-->
+
 <section style="background: none;" ng-controller="HomeController" ng-init="findItineraries()">
   <div class="row">
     <h4> {{authentication.user.displayName}}! Your itinerary Is Here!</h4>
@@ -7,13 +28,20 @@
     <div class="page-header">
       <a class="btn btn-link" ng-click="sendMail()" > Share <img width="20" height="20" src="/modules/core/client/img/email.jpg"></a>
 
-      <a class="btn btn-link" ng-click="fbShare('Fb Share', 'Facebook share popup',
-       'http://goo.gl/dS52U', 520, 350)">Facebook</a>
-      <div class="pull-right" >
-        <button class="btn btn-info" ng-click="openItinerary(null,null)">Create Itinerary</button>
-      </div>
+ <a class="btn btn-link" ng-click="share()">Facebook</a>
+      <!--<a facebook-feed-share class="facebookShare" data-url="{{url}}" data-name="Travel With Me" data-description="Find my Itinerary here and Travel With Me">{{share}}</a>
+      <a facebook-feed-share class="facebookShare" data-url='http://localhost:3000/' data-shares='shares', data-description="Find my Itinerary here and Travel With Me">{{ shares }}</a>
+      --><div class="pull-right" >
+         <button class="btn btn-success " ng-if="authentication.user && itineraries.length>0">Book this Itinerary</button>
+      <button class="btn btn-info"  ng-if="authentication.user" ng-click="openItinerary(null,null)">Create Itinerary</button>
     </div>
-    <div class="col-md-12">
+    </div>
+ <!-- <div
+    class="fb-like"
+    data-share="true"
+    data-width="450"
+    data-show-faces="true">
+  </div>--><div class="col-md-12">
 
 
      <!-- <div class="row" ng-click="expand" ng-repeat="i in itinerary">
@@ -28,16 +56,20 @@
           </div>
           </div>
         </div>-->
-
-      <div class="row"  ng-repeat="i in itineraries| orderBy:'-created.at'">
+      <!--<button class="btn btn-success " ui-sref="itinerary.view({itineraryId: itineraryUId})" >View</button>
+      <button class="btn btn-success " ng-click="findItineraries(itineraryUId)" >Show</button>
+-->
+       <div class="row"  ng-repeat="i in itineraries| orderBy:'-created.at'">
 
           <div  ng-if="i.type=='hotel'" class="col-md-10 gridbox" >
 
              <div class="gridtop emerald full-width">
 
               <h4>{{i.day_number}} {{i.day| date:'mediumDate'}} {{i.title}} {{i.data.city}}
-
+                <button ng-if="authentication.user" style="margin-top: -10px;" class="pull-right btn btn-success wisteria " >Book</button>
               </h4>
+
+
             </div>
             <div class="content">
               <a style="cursor: pointer;" class="cursor-pointer" ng-click="getHotelDetails(i.data.id,$index)">
@@ -48,10 +80,13 @@
               <p ng-bind="i.data.state"></p>
               <span ng-bind="i.notes"><label>Notes:</label></span>
 
-             <div class="pull-right" >
+             <div ng-if="authentication.user" class="pull-right" >
+
                <button class=" btn btn-warning" ng-click="getHotelDetails(i.data.id,$index)">Explore NearBy Places</button>
-               <button class="btn wisteria" ng-click="editItinerary(i,$index)">Edit</button>
-               </div>
+               <button class="btn btn-success asbestos" ng-click="editItinerary(i,$index)">Edit</button>
+
+               <button class="btn-sm btn-danger" >Remove</button>
+             </div>
             </div>
 
             <div class="block-border col-md-10"  ng-if="i.hotelInfo">
@@ -102,13 +137,31 @@
 
             <h4 ng-bind="i.place"></h4>
               <label>Notes:</label><p ng-bind="i.notes"></p>
-              <div class="pull-right" >
+              <div ng-if="authentication.user" class="pull-right" >
                 <button class=" btn btn-warning" ng-click="getHotelDetails(i.data.id,$index)">Explore NearBy Places</button>
-                <button class="btn btn-success wisteria" ng-click="editItinerary(i,$index)">Edit</button>
-              </div>
+                <button class="btn btn-success asbestos" ng-click="editItinerary(i,$index)">Edit</button>
+
+                <button class="btn-sm btn-danger" >Remove</button> </div>
                 </div>
             </div>
 
+        <div  ng-if="i.type=='flight'" class="col-md-10 gridbox">
+          <div class="gridtop sunflower full-width">
+
+            <h4>{{i.day_number}} {{i.day| date:'mediumDate'}} {{i.title}} {{i.data.city}}
+              <button ng-if="authentication.user" style="margin-top: -10px;" class="pull-right btn btn-success " >Book</button>
+            </h4>
+          </div>
+
+          <div class="content">
+
+            <h4 ng-bind="i.place"></h4>
+            <label>Notes:</label>{{i.notes}}
+            <div class="pull-right" >
+              <button ng-if="authentication.user"class="btn-sm btn-danger" >Remove</button>
+            </div>
+          </div>
+        </div>
 
 
         </div>
@@ -122,5 +175,5 @@
     </div>
 
 
-
 </section>
+

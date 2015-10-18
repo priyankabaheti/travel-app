@@ -1,14 +1,19 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope','$rootScope','$http','$modal', 'Authentication','City','Itinerary',
-  function ($scope,$rootScope, $http,$modal,Authentication,City,Itinerary) {
+angular.module('core').controller('HomeController', ['$scope','$rootScope','$location','$http','$modal', 'Authentication','City','Itinerary',
+  function ($scope,$rootScope,$location, $http,$modal,Authentication,City,Itinerary) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
       var modalScope = $rootScope.$new();
     //$scope.find = function () {
       //$scope.cities = City.query();
-      console.log("in city");
+
+      var pId = $location.path().split("/")[2]||"Unknown";    //path will be /person/show/321/, and array looks like: ["","person","show","321",""]
+      console.log(pId);
+      if(pId!="Unknown"){
+          $scope.itineraryUId=pId;
+      }
       //console.log($scope.cities);
      $scope.recommend = function (parameter) {
 
@@ -156,9 +161,9 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
       $scope.addToItinerary=function(data,type){
 
           //$scope.modalInstance.dismiss('cancel');
-         // console.log( $scope.itinerary_data);
-          //console.log()
-         if(data) {
+          console.log( $scope.itinerary_data);
+          console.log(type);
+         if(type=='hotel') {
              var d=$scope.itinerary.day.split("-");
              console.log(d);
              /*var itinerary_info= {
@@ -211,7 +216,7 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
              }*/
 
          }
-        if(type){
+        else if(type=='user'){
             var d=$scope.itiner.day.split("-");
             console.log(d);
             var itinerary = new Itinerary({
@@ -228,6 +233,23 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
 
             });
         }
+          else if(type=='flight'){
+              var d=$scope.itiner.day;
+              //console.log(d);
+              var itinerary = new Itinerary({
+                  title: $scope.itiner.title,
+                  type:'flight',
+                  notes: $scope.itiner.notes,
+                  day: d,
+                  data:$scope.itiner.data,
+                  place: $scope.itiner.place,
+                  created: {
+                      at: new Date(),
+                      by: $scope.authentication.user._id
+                  }
+
+              });
+          }
         else{
              console.log("inside else");
 
@@ -334,7 +356,48 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
 
           });
       }
+        $scope.openFlight=function (itiners) {
 
+            console.log(itiners);
+            var itiner = {
+                place: itiners.destination,
+                title: "Travel from "+ itiners.origin+ " -->"+ itiners.destination+" via "+itiners.airline+"--"+itiners.carrierid+ itiners.flightno,
+                data:itiners,
+                day:itiners.DepartureTime,
+                notes: "FARE : Rs " +itiners.fare.travelportgrossamount+ "\n"+"Departs at: " +itiners.DepartureTime+
+                "\n"+"Arrives at: " +itiners.ArrivalTime+ "\n"+itiners.warnings
+
+            };
+
+
+            modalScope.itiner = itiner;
+           // modalScope.data=itiner;
+
+
+            modalScope.modalInstance = $modal.open({
+                controller: 'HomeController',
+                templateUrl: '/modules/core/client/views/create.flight.html',
+                scope: modalScope,
+                backdrop: 'static',
+                keyboard: true,
+                dialogFade: true,
+                resolve: {
+                    target: function () {
+                        console.log('Inside Upload control resolve..');
+                        console.log($scope.itiner);
+                        return $scope.itiner;
+                    }
+                }
+            });
+            modalScope.modalInstance.opened.then(function () {
+
+            });
+
+            modalScope.modalInstance.result.then(function (response) {
+
+
+            });
+        }
 
       $scope.openAttraction = function (hotel,attraction) {
 
@@ -376,17 +439,8 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
           });
       };
       $scope.openItinerary = function (hotel,flight,attraction) {
-          if(hotel && attraction){
-                console.log(hotel);
-              console.log(attraction);
-              var data = hotel.data;
-              $scope.itinerary_data = {
 
-
-              };
-
-          }
-          if(hotel &&!attraction) {
+          if(hotel) {
               var data = hotel.hotel_data_node;
               console.log($scope.numOfDays);
 
@@ -503,9 +557,15 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
           };*/
          // if() exists  then  addtoItninerary green  true else openitinerary
       }
-      $scope.findItineraries = function () {
-          $scope.itineraries = Itinerary.query({itineraryId:$scope.authentication.user._id});
-          console.log($scope.itineraries);
+      $scope.findItineraries = function (id) {
+
+          if(!$scope.itineraryUId) {
+              $scope.itineraries = Itinerary.query({itineraryId: $scope.authentication.user._id});
+          }
+          else{
+              $scope.itineraries = Itinerary.query({itineraryId:$scope.itineraryUId});
+              console.log($scope.itineraries);
+          }
       };
 
       $scope.sendMail = function() {
@@ -707,6 +767,22 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
                   });
           }
       };
+      $scope.share = function(post){
+          FB.ui(
+              {
+                  method: 'feed',
+                  name: 'Travel With Me.',
+                  link: 'http://localhost:3000/'+$scope.authentication.user._id,
+                  picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
+                  caption: "Find my Itinerary here and Travel With Me",
+
+                  description: 'Find my Itinerary here and Travel With Me',
+                  message: 'Find my Itinerary here and Travel With Me'
+              });
+      }
+      $scope.url='http://localhost:3000/'+$scope.authentication.user._id;
+      //+ "Find my Itinerary here and Travel With Me";
+
       $scope.fbShare=function( title, descr, image, winWidth, winHeight) {
           var url='http://localhost:3000/'+$scope.authentication.user._id + "Find my Itinerary here and Travel With Me";
           var winTop = (screen.height / 2) - (winHeight / 2);
@@ -716,50 +792,5 @@ angular.module('core').controller('HomeController', ['$scope','$rootScope','$htt
       $scope.centerAt='';
       $scope.googleMapsUrl="http://maps.google.com/maps/api/js?v=3.20";
 
-      /*var mapOptions = {
-          zoom: 4,
-          center: new google.maps.LatLng(40.0000, -98.0000),
-          mapTypeId: google.maps.MapTypeId.TERRAIN
-      }*/
-     /* $scope.$on('mapInitialized', function() {
-         // $http.get('some/url').then(function(data) {
-              $scope.centerAt = $scope.hotelData.loc.lat +" , "+$scope.hotelData.loc.long;
-              //$scope.map.setCenter(center);
-          console.log($scope.centerAt);
-         // });
-      });*/
-
-     /* $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      $scope.markers = [];
-
-      var infoWindow = new google.maps.InfoWindow();
-
-      var createMarker = function (info){
-
-          var marker = new google.maps.Marker({
-              map: $scope.map,
-              position: new google.maps.LatLng(info.lat, info.long),
-              title: info.city
-          });
-          marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-
-          google.maps.event.addListener(marker, 'click', function(){
-              infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-              infoWindow.open($scope.map, marker);
-          });
-
-          $scope.markers.push(marker);
-
-      }
-
-      for (i = 0; i < cities.length; i++){
-          createMarker(cities[i]);
-      }
-
-      $scope.openInfoWindow = function(e, selectedMarker){
-          e.preventDefault();
-          google.maps.event.trigger(selectedMarker, 'click');
-      }*/
 
   }]);

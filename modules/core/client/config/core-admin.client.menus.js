@@ -10,3 +10,6 @@ angular.module('core.admin').run(['Menus',
     });
   }
 ]);
+angular.module('core').run(function($FB){
+    $FB.init('1638811949706838');
+});

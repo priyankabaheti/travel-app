@@ -15,17 +15,19 @@ angular.module('articles').config(['$stateProvider',
         templateUrl: 'modules/articles/client/views/list-articles.client.view.html'
       })
         .state('itinerary', {
-            abstract: true,
-            url: '/itinerary',
-            templateUrl: '<ui-view/>'
 
-        })
+            abstract: true,
+            template: '<ui-view/>',
+            url: '/itinerary',
+            templateUrl: 'modules/core/client/views/list-itineraries.client.view.html'})
         .state('itinerary.view', {
 
             url: '/:itineraryId',
             templateUrl: 'modules/core/client/views/list-itineraries.client.view.html'
 
         })
+
+
       .state('articles.create', {
         url: '/create',
         templateUrl: 'modules/articles/client/views/create-article.client.view.html',

@@ -5,7 +5,8 @@ module.exports = {
     lib: {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+          'public/lib/angular-socialshare/angular-socialshare.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -20,7 +21,8 @@ module.exports = {
         'public/lib/moment/moment.min.js',
         'public/lib/jquery/dist/jquery.js',
           'public/lib/maps.google.js',
-          'public/lib/ngmap/build/scripts/ng-map.min.js'
+          'public/lib/ngmap/build/scripts/ng-map.min.js',
+        'public/lib/angular-socialshare/angular-socialshare.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

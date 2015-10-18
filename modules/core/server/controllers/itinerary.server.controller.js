@@ -175,6 +175,7 @@ exports.itineraryByID = function (req, res, next, id) {
             message: 'itinerary is invalid'
         });
     }
+    console.log(id);
 
     Itinerary.find({ $or: [{'created.by':id},{'shared_with':id}]}).populate('user', 'displayName').exec(function (err, itinerary) {
         if (err) {
